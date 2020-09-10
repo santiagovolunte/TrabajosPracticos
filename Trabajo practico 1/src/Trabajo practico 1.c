@@ -26,6 +26,7 @@ int main(void) {
 	int resultadoFac2;
 	int flagA = 0;
 	int flagB = 0;
+    int flagC = 0;
 
 	do {
 		if (flagA == 0) {
@@ -67,6 +68,7 @@ int main(void) {
 			break;
 
 		case 3:
+			if(flagA==1 && flagB==1){
 			system("cls");
 			printf("\nCalculando...\nPresione 4 para ver los resutlados\n");
 			resultadoSuma = suma(num1, num2);
@@ -75,10 +77,17 @@ int main(void) {
 			resultadoMul = multiplicacion(num1, num2);
 			resultadoFac = factorial(num1);
 			resultadoFac2 = factorial(num2);
+			flagC= 1;
 			system("pause");
-			break;
 
+			}
+			else{
+				printf("Debe ingresar dos numeros antes de calcular \n");
+			}
+			break;
 		case 4:
+			if(flagA==1 && flagB==1){
+				if (flagC==1){
 			system("cls");
 			printf("\n4- Resultados: \n ");
 			printf("\na) El resultado de %d + %d es: %d", num1, num2,
@@ -109,7 +118,12 @@ int main(void) {
 						"\n, no se puede factorizar %d por ser un valor negativo\n\n",num2);
 			}
 
-			system("pause");
+			system("pause");}
+				else{
+					printf("\n Debe calcular antes de mostrar los resultados\n");
+				}
+				}
+			else{printf("Debe ingresar dos numeros antes de calcular \n");}
 			break;
 
 		case 5:
