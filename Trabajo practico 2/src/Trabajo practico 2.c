@@ -14,6 +14,7 @@
 #include <string.h>
 #include <conio.h>
 #include <ctype.h>
+#include "utn.h"
 #include "ArrayEmployees.h"
 #define QTY_EMPLOYEES 1000
 
@@ -21,6 +22,7 @@ int main(void) {
 	setbuf(stdout, NULL);
 
 	int opcion;
+	Employee list[QTY_EMPLOYEES];
 	int flag = 0;
 	int r;
 	char name[51];
@@ -29,12 +31,11 @@ int main(void) {
 	float salary;
 	int ID;
 	int idContador = 0;
-	int add;
-	int d=0;
-	int sort;
+	int d = 0;
+	int ordenar;
 	float acumulator = 0;
-	float average=0;
-	Employee list[QTY_EMPLOYEES];
+	float average = 0;
+	int informar;
 
 	r = initEmployees(list, QTY_EMPLOYEES);
 	if (r != 0) {
@@ -44,29 +45,37 @@ int main(void) {
 	}
 	do {
 
-		if (utn_getInt(&opcion,
-				"\n1-ALTAS \n2-MODIFICAR\n3- BAJA\n4-INFORMAR\n5- SALIR",
-				"Error ingrese un numero valido", 1, 5, 3) == 0) {
+		if (utn_getNumero(&opcion,
+				"\n1-ALTAS \n2-MODIFICAR\n3- BAJA\n4-INFORMAR",
+				"Error ingrese un numero valido", 1, 4, 3) == 0) {
 			switch (opcion) {
 			case 1:
 				flag = 1;
 				system("pause");
 				system("CLS");
-				idContador++;
-				ID = idContador;
 				printf("Ingrese el nombre del empleado/a:\n");
+
 				getChar(name);
+
 				printf("Ingrese el apellido del empleado/a:\n");
 				getChar(lastName);
+
 				printf("Ingrese el sueldo: \n");
+				fflush(stdin);
 				scanf("%f", &salary);
+
 				printf("Ingrese el sector: \n");
+				fflush(stdin);
 				scanf("%d", &sector);
-				add = addEmployee(list, QTY_EMPLOYEES, ID, name, lastName,
+
+				idContador++;
+				ID = idContador;
+
+				r = addEmployee(list, QTY_EMPLOYEES, ID, name, lastName,
 						salary, sector);
-				if (add != -1) {
+				if (r != -1) {
 					system("CLS");
-					printf("\nLa carga se realizo con exito\n");
+					printf("\nLa carga se realizo de forma extitosa\n");
 				} else {
 					system("CLS");
 					printf("\nNo se ha podido cargar correctamente\n");
@@ -75,77 +84,77 @@ int main(void) {
 
 			case 2:
 				if (flag == 1) {
-					printf("\ncaso 2");
-					system("pause");
 
-					printf("\nEn proceso: "); // Impresion por pantalla del mensaje
-					system("PAUSE"); // Pausamos la ejecución del programa
-					system("CLS"); // Limpiamos pantalla
-					add = printEmployees(list, QTY_EMPLOYEES); // Llamamos a la función "printEmployees" pasandole el array de empleados y el tamaño del mismo, el valor devuelto lo guardamos en la variable "control"
-					printf("Ingrese el id que desea modificar: "); // Impresion por pantalla del mensaje
-					scanf("%d", &ID); // Guardamos el valor ingresado por teclado en la variable id
-					system("CLS"); // Limpiamos pantalla
+					system("PAUSE");
+					system("CLS");
+					printEmployees(list, QTY_EMPLOYEES);
+					printf("Ingrese el id del empleado que desea modificar: ");
+					scanf("%d", &ID);
+
+					system("CLS");
 					modifyEmployee(list, QTY_EMPLOYEES, ID);
 				}
 
 				else {
-					printf("Error antes debe ingresar un empleado");
+					printf("Error, antes debe ingresar un empleado");
 				}
 				break;
 
 			case 3:
 				if (flag == 1) {
-					printf("En proceso: "); // Impresion por pantalla del mensaje
-					system("PAUSE"); // Pausamos la ejecución del programa
-					system("CLS"); // Limpiamos pantalla
-					add = printEmployees(list, QTY_EMPLOYEES); // Llamamos a la funcion "printEmployees" pasandole como valores el array de empleados y el tamaño del mismo, el valor devuelto lo guardamos en la vriable "control"
-					if (add != -1) // En caso que el valor de control sea distinto a -1 ejecutamos el sigueinte bloque de código
-							{
-						printf("\nIngrese el id que desea dar de baja: "); // Impresion por pantalla del mensaje
-						scanf("%d", &ID); // Guardamos el valor ingresado por teclado en la variable id
-						add = removeEmployee(list, QTY_EMPLOYEES, ID); // Llamamos a la función "removeEmployee" pasandole como valores el array de empleados, el tamaño del mismo y el id que deseamos eliminar del sistema, el valor devuelto lo guardamos en la variable "control"
-						if (add != -1) // En caso que el valor de control sea distinto a -1 ejecutamos el sigueinte bloque de código
-								{
-							system("CLS"); // Limpiamos pantalla
-							printf("Baja exitosa\n"); // Impresion por pantalla del mensaje
+					system("PAUSE");
+					system("CLS");
+					r = printEmployees(list, QTY_EMPLOYEES);
+					if (r != -1) {
+						printf("\nIngrese el id que desea dar de baja: ");
+						scanf("%d", &ID);
+						r = removeEmployee(list, QTY_EMPLOYEES, ID);
+						if (r != -1) {
+							system("CLS");
+							printf("Baja exitosa\n");
 						} else {
-							system("CLS"); // Limpiamos pantalla
-							printf("No se dio de baja\n"); // Impresion por pantalla del mensaje
+							system("CLS");
+							printf("No se dio de baja\n");
 						}
 					}
 				}
 
 				else {
-					printf("Error antes debe ingresar un empleado");
+					printf("Error, antes debe ingresar un empleado");
 				}
 				break;
 			case 4:
 				if (flag == 1) {
-					system("CLS"); // Limpiamos pantalla
+					system("CLS");
+					utn_getNumero(&informar,"\n1 - 1. Listado de los empleados ordenados alfabéticamente por Apellido y Sector. \n0 -2. Total y promedio de los salarios, y cuántos empleados superan el salario promedio. " , "ERROR, ingrese un numero valido", 1,
+							2, 2);
+					switch (informar){
+					case 1:
 					printf(
-							"\nDesea imprimirlos de forma \n1 - Cresciente\n0 - Decresciente"); // Impresion por pantalla del mensaje
-					scanf("%d", &sort); // Guardamos el valor ingresado por teclado en la variable sort
-					system("CLS"); // Limpiamos pantalla
-					add = sortEmployees(list, QTY_EMPLOYEES, sort); // Llamamos a la funcion "sortEmployees" para ordenar el array de empleados, el valor devuelto lo guardamos en la variable "control"
-					add = printEmployees(list, QTY_EMPLOYEES); // Llamamos a la funcion "printEmployees" parar imprimir todos los usuarios dados de alta (isEmpty = 0), el valor devuelto lo guardamos en la variable "control"
+							"\n - Si desea infomar de manera cresciente ingrese '1' \n-Si desea infomar de manera decresciente ingrese '0'");
+					scanf("%d", &ordenar);
+					system("CLS");
+					r = sortEmployees(list, QTY_EMPLOYEES, ordenar);
+					r = printEmployees(list, QTY_EMPLOYEES);
+					break;
+					case 2:
 					d = totalAndAverageSalary(list, QTY_EMPLOYEES, &average,
-							&acumulator); // Llamamos a la función "totalAndAverageSalary" para calcular, el total de los salarios, el promedio y cuantos empleados ganan mas que el promedio
+							&acumulator);
 					printf(
-							"\nSueldos totales: %f\nPromedio de sueldos: %f\nPersonas que ganan mas que el promedio: %d",
-							acumulator, average, d); // Imprimimos por pantalla los valores
+							"\nSueldos totales: %.2f\nPromedio de sueldos: %.2f\n-Personas que ganan mas que el promedio: %d",
+							acumulator, average, d);
+					break;
 				}
-
+				}
 				else {
 					printf("Error antes debe ingresar un empleado");
 				}
 				break;
 
-			case 5:
-				break;
 			}
 		}
 
-	} while (opcion != 5);
+	} while (opcion != 27);
 
 	return 0;
 }

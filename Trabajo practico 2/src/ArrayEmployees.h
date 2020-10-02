@@ -41,30 +41,16 @@ free space] - (0) if Ok
 */
 int addEmployee(Employee* list, int len, int id, char name[],char
 lastName[],float salary,int sector);
-/** \brief Busca a un empleado en el array a través de su id y en caso de encontrarlo devuelve su posición en el array
- *
- * \param list Employee* Puntero del array de empleados
- * \param len int Tamaño del array de empleados
- * \param id int Parametro ingresado por el usuario indicando un ID de un usuario
- * \return int Devuelve la posición en el array del empleado, en caso de no encotnrarlo devuelve -1
- *
- */
-int findEmployeeById(Employee* list, int len, int id);
-/** \brief add in a existing list of employees the values received as parameters
-* in the first empty position
-* \param list employee*
+/** \brief find an Employee by Id en returns the index position in array.
+*
+* \param list Employee*
 * \param len int
 * \param id int
-* \param name[] char
-* \param lastName[] char
-* \param salary float
-* \param sector int
-* \return int Return (-1) if Error [Invalid length or NULL pointer or without
-free space] - (0) if Ok
+* \return Return employee index position or (-1) if [Invalid length or NULL
+pointer received or employee not found]
 *
 */
-int utn_getInt(int *pResultado, char *mensaje, char *mensajeError, int minimo,
-		int maximo, int reintentos);
+int findEmployeeById(Employee* list, int len, int id);
 
 /** \brief To indicate that all position in the array are empty,
 * this function put the flag (isEmpty) in TRUE in all
@@ -75,30 +61,17 @@ int utn_getInt(int *pResultado, char *mensaje, char *mensajeError, int minimo,
 *
 */
 int findEmpty(Employee* list, int len);
-/** \brief Ordena el array de empleados por sector y por apellido, tanto de forma cresciente como decresciente según lo decida el usuario
- *
- * \param list Employee* Puntero del array de empleados
- * \param len int Tamaño del array de empleados
- * \param order int Valor que recibe la función por parametro, 1 cresciente, 0 decresciente
- * \return int Devuelve un cero si el orden se realiza
- *
- */
+/** \brief Sort the elements in the array of employees, the argument order
+indicate UP or DOWN order
+*
+* \param list Employee*
+* \param len int
+* \param order int [1] indicate UP - [0] indicate DOWN
+* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+*
+*/
 int sortEmployees(Employee* list, int len, int order);
 
-/** \brief Toma una cadena de caracteres y la valida para que solamente se ingresen letras
- *
- * \param palabra[30] char Cadena de caracteres a recibir
- * \return void No devuelve nada
- *
- */
-void getChar(char palabra[51]);
-/** \brief Valida una cadena de caracteres para que solo se ingresen numeros y luego la transforma en un entero
- *
- * \param void No toma nada
- * \return int Devuelve la conversión de caracter a entero
- *
- */
-int getInt(void);
 /** \brief Calcula el total, promedio y cantidad de empleados que ganen mas que el promedio
  *
  * \param list Employee* Puntero al array de empleados
@@ -107,14 +80,15 @@ int getInt(void);
  *
  */
 int totalAndAverageSalary(Employee* list, int len, float *average, float *acumulator);
-/** \brief Elimina un usuario de forma lógica (bandera isEmpty = 1)
- *
- * \param list Employee* Puntero del array de empleados
- * \param len int Tamaño del array de empleados
- * \param id int Valor ingresado por teclado, haciendo referencia al ID del empleado a buscar
- * \return int Devuelve 0 si la baja se hizo de forma exitosa, en el caso contrario devuelve -1
- *
- */
+/** \brief Remove a Employee by Id (put isEmpty Flag in 1)
+*
+* \param list Employee*
+* \param len int
+* \param id int
+* \return int Return (-1) if Error [Invalid length or NULL pointer or if can't
+find a employee] - (0) if Ok
+*
+*/
 int removeEmployee(Employee* list, int len, int id);
 /** \brief Busca en el array de empleados un empleado por ID
  *
@@ -134,12 +108,12 @@ int printOneEmployee(Employee* list, int id, int size);
  *
  */
 int modifyEmployee(Employee* list, int len, int id);
-/** \brief Imprime el array de empleados que se encuentran dados de alta
- *
- * \param list Employee* Puntero del array de empleados
- * \param int length Tamaño del array de empleados
- * \return int Devuelve un cero cuando termina de imprimir los empleados
- *
- */
+/** \brief print the content of employees array
+*
+* \param list Employee*
+* \param length int
+* \return int
+*
+*/
 int printEmployees(Employee* list, int length);
 #endif
