@@ -72,11 +72,11 @@ indicate UP or DOWN order
 */
 int sortEmployees(Employee* list, int len, int order);
 
-/** \brief Calcula el total, promedio y cantidad de empleados que ganen mas que el promedio
+/** \brief Calculate the total, average and number of employees who earn more than the average
  *
- * \param list Employee* Puntero al array de empleados
- * \param len int Tamaño del array de empleados
- * \return int Devuelvo la cantidad de empleados que ganan mas que el promedio
+ * \param list Employee*  array of employee
+ * \param len is int Size of  array of employee
+ * \return int Return  the number of employees who earn more than average
  *
  */
 int totalAndAverageSalary(Employee* list, int len, float *average, float *acumulator);
@@ -90,29 +90,29 @@ find a employee] - (0) if Ok
 *
 */
 int removeEmployee(Employee* list, int len, int id);
-/** \brief Busca en el array de empleados un empleado por ID
+/** \brief Search the employee array for an employee by ID
  *
- * \param list Employee* Puntero al array de empleados
- * \param id int ID a buscar
- * \param size int Tamaño del array de empleados
+ * \param  list Employee*
+ * \param len int Size of the employee array
+ * \param ID search
  * \return int Devuelve 0 en caso de OK
  *
  */
 int printOneEmployee(Employee* list, int id, int size);
-/** \brief Busca un ID en el array de empleados en caso de encontrarlo permite modificar sus parametros
+/** \brief Search for an ID in the employee array, if found, it allows modifying its parameters
  *
- * \param list Employee* Puntero al array de empleados
- * \param len int Tamaño del array de empleados
+ * \param list Employee*
+ * \param len int Size of the employee array
  * \param id int ID a buscaar
- * \return int Devuelve 0 en caso de haber modificado algo, -1 en caso de error (No se modifico, no se dio de baja)
+ * \return int Returns 0 in case of having modified something, -1 in case of error
  *
  */
 int modifyEmployee(Employee* list, int len, int id);
 /** \brief print the content of employees array
 *
 * \param list Employee*
-* \param length int
-* \return int
+* \param len int Size of the employee array
+* \return int return 0 is everything is fine
 *
 */
 int printEmployees(Employee* list, int length);

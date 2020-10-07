@@ -1,5 +1,5 @@
 /*
- * menu.c
+ * utn.c
  *
  *  Created on: 9 sep. 2020
  *      Author: Santiago Volunté
@@ -7,7 +7,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <string.h>
 #include <conio.h>
 #include <ctype.h>
@@ -121,7 +120,7 @@ int getInt(void) {
 	return numberI;
 }
 
-void getChar(char string[51]) {
+void utn_getName(char string[51]) {
 	int state = 1;
 	int state2 = 1;
 	int size;
@@ -139,7 +138,7 @@ void getChar(char string[51]) {
 
 	do {
 		if (state == 0) {
-			printf("\n\nReingrese la palabra: ");
+			printf("\nReingrese la palabra: ");
 			gets(string);
 			size = strlen(string);
 			if (size >= 51) {

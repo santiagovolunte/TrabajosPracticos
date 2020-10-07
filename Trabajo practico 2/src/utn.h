@@ -1,5 +1,5 @@
 /*
- * menu.h
+ * utn.h
  *
  *  Created on: 9 sep. 2020
  *      Author: Santiago Volute
@@ -11,31 +11,40 @@
 
 
 #endif /* UTN_H_ */
-/** \brief Valida una cadena de caracteres para que solo se ingresen numeros y luego la transforma en un entero
+/** \brief Solicita caracter al usuario
  *
- * \param
- * \param
- * \param
- * \return int Devuelve la conversión de caracteres a entero
+ * \param pResultado puntero al espacio de memoria donde se dejara el resultado
+ * \param Mensaje que  le solicitara una letra al usuario
+ * \param Mensaje de error en caso de que el usuario haya ingresado algo incorrecto
+ * \param Minimo segun el codigo ASCII
+ * \param Maximo segun el codigo ASCII
+ * \param Cantidad de reintentos que se le da al usuario
+ * \return retorna 0  si salio con exito. retorna -1 en cado de error.
  *
  */
 int unt_getCaracter (char* pResultado, char* mensaje, char* mensajeError,char minimo,char maximo,int reintentos);
-/** \brief Valida una cadena de caracteres para que solo se ingresen numeros y luego la transforma en un entero
+/** \brief Solcita al usuario un numero del tipo int
  *
- * \param
- * \param
- * \param
+ * \param pResultado puntero al espacio de memoria donde se dejara el resultado
+ * \param Mensaje que  le solicitara el numero al usuario
+ * \param Mensaje de error en caso de que el usuario haya ingresado algo incorrecto
+ * \param Numero minimo que se debera ingresar
+ * \param Numero maximo que se debera ingresar
+ * \param Cantidad de reintentos que se le da al usuario
  * \return int Devuelve la conversión de caracteres a entero
  *
  */
 int utn_getNumero(int *pResultado, char *mensaje, char *mensajeError, int minimo,
 		int maximo, int reintentos);
-/** \brief Valida una cadena de caracteres para que solo se ingresen numeros y luego la transforma en un entero
+/** \brief Solcita al usuario un numero del tipo float
  *
- * \param
- * \param
- * \param
- * \return int Devuelve la conversión de caracteres a entero
+ * \param pResultado puntero al espacio de memoria donde se dejara el resultado
+ * \param Mensaje que  le solicitara el numero al usuario
+ * \param Mensaje de error en caso de que el usuario haya ingresado algo incorrecto
+ * \param Numero minimo que se debera ingresar
+ * \param Numero maximo que se debera ingresar
+ * \param Cantidad de reintentos que se le da al usuario
+ * \return retorna 0  si salio con exito. retorna -1 en cado de error.
  *
  */
 float utn_getFloat(float *pResultado, char *mensaje, char *mensajeError,
@@ -44,18 +53,18 @@ float utn_getFloat(float *pResultado, char *mensaje, char *mensajeError,
 int inicializar(int[],int libre,int tam);
 /** \brief Valida una cadena de caracteres para que solo se ingresen numeros y luego la transforma en un entero
  *
- * \param void
- * \return int Devuelve la conversión de caracteres a entero
+ * \param void (Nada)
+ * \return int Devuelve la conversión de caracteres a int
  *
  */
 int getInt(void);
-/** \brief Calcula el total, promedio y cantidad de empleados que ganen mas que el promedio
+/** \brief Toma una cadena de caracteres y la valida para que solamente se ingresen letras
  *
- * \param list Employee* Puntero al array de empleados
- * \param len int Tamaño del array de empleados
- * \return int Devuelvo la cantidad de empleados que ganan mas que el promedio
+ * \param Strint[51] char Cadena que recibe
+ * \return void (Nada)
  *
  */
-void getChar(char string[51]);
+void utn_getName(char string[51]);
 
 int cargar(int[],int* pos);
+int inicializar(int[],int libre,int tam);
