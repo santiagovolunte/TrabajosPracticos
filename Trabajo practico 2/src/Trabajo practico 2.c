@@ -24,24 +24,14 @@ int main(void) {
 	Employee list[QTY_EMPLOYEES];
 	int flag = 0;
 	int r;
-	char name[51];
-	char lastName[51];
-	int sector;
-	float salary;
-	int ID;
-	int idCounter = 0;
 	int order;
 	float acumulator = 0;
 	float average = 0;
 	int rich=0;
 	int report;
+	int ID=0;
+	initEmployees(list, QTY_EMPLOYEES);
 
-	r = initEmployees(list, QTY_EMPLOYEES);
-	if (r != 0) {
-		printf("El programa inicia con normalidad.");
-		system("pause");
-		system("CLS");
-	}
 	do {
 
 		if (utn_getNumero(&option,
@@ -50,35 +40,8 @@ int main(void) {
 			switch (option) {
 			case 1:
 				flag = 1;
-				system("pause");
-				system("CLS");
-				printf("Ingrese el nombre del empleado/a:\n");
-
-				utn_getName(name);
-
-				printf("Ingrese el apellido del empleado/a:\n");
-				utn_getName(lastName);
-
-				printf("Ingrese el sueldo: \n");
-				fflush(stdin);
-				scanf("%f", &salary);
-
-				printf("Ingrese el sector: \n");
-				fflush(stdin);
-				scanf("%d", &sector);
-
-				idCounter++;
-				ID = idCounter;
-
-				r = addEmployee(list, QTY_EMPLOYEES, ID, name, lastName, salary,
-						sector);
-				if (r != -1) {
-					system("CLS");
-					printf("\nLa carga se realizo de forma extitosa\n");
-				} else {
-					system("CLS");
-					printf("\nNo se ha podido cargar correctamente\n");
-				}
+				getEmployee(list, QTY_EMPLOYEES,&ID);
+				system("PAUSE");
 				break;
 
 			case 2:
@@ -137,7 +100,7 @@ int main(void) {
 						r = printEmployees(list, QTY_EMPLOYEES);
 						break;
 					case 2:
-						rich = totalAndAverageSalary(list, QTY_EMPLOYEES, &average,
+						rich = AverageSalary(list, QTY_EMPLOYEES, &average,
 								&acumulator);
 						printf(
 								"\nSueldos totales: %.2f\nPromedio de sueldos: %.2f\n-Personas que ganan mas que el promedio: %d",

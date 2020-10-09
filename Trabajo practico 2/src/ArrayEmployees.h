@@ -26,6 +26,13 @@ struct
 *
 */
 int initEmployees(Employee* list, int len);
+/**
+ * \brief	Modify an element of the Employees array
+ *  \param	Receive the list of Employees
+ *  \param	Receive the size of that list
+ *  \return Returns 0 in case of not being able to Print on screen, or 1 if it printed correctly
+ */
+int getEmployee(Employee *list, int len, int *lastID);
 /** \brief add in a existing list of employees the values received as parameters
 * in the first empty position
 * \param list employee*
@@ -79,7 +86,7 @@ int sortEmployees(Employee* list, int len, int order);
  * \return int Return  the number of employees who earn more than average
  *
  */
-int totalAndAverageSalary(Employee* list, int len, float *average, float *acumulator);
+int AverageSalary(Employee* list, int len, float *average, float *acumulator);
 /** \brief Remove a Employee by Id (put isEmpty Flag in 1)
 *
 * \param list Employee*

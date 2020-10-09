@@ -28,13 +28,15 @@ int initEmployees(Employee *list, int len) {
 
 int findEmpty(Employee *list, int len) {
 	int i;
-	int retorno;
-	for (i = 0; i < len; i++) {
-		if (list[i].isEmpty == 1) {
-			retorno = i;
-			break;
-		} else {
-			retorno = -1;
+	int retorno = -2;
+	if (len > 0) {
+		for (i = 0; i < len; i++) {
+			if (list[i].isEmpty == 1) {
+				retorno = i;
+				break;
+			} else {
+				retorno = -1;
+			}
 		}
 	}
 	return retorno;
@@ -84,11 +86,12 @@ int modifyEmployee(Employee *list, int len, int id) {
 
 	if (empleado != -1) {
 		printOneEmployee(list, id, len);
-		printf(	"\nQue dato desea modificar: \n1-Nombre\n2-Apellido\n3-Salario\n4-Sector\n5-Nada");
+		printf(
+				"\nQue dato desea modificar: \n1-Nombre\n2-Apellido\n3-Salario\n4-Sector\n5-Nada");
 		scanf("%d", &modify);
 		system("CLS");
 
-		switch(modify){
+		switch (modify) {
 		case 1:
 			printf("\nIngrese el nuevo nombre: ");
 			utn_getName(list[empleado].name);
@@ -118,10 +121,10 @@ int modifyEmployee(Employee *list, int len, int id) {
 			break;
 
 		default:
-		printf("\nID no encontrado");
-		retorno = -1;
-		break;
-	}
+			printf("\nID no encontrado");
+			retorno = -1;
+			break;
+		}
 	}
 	return retorno;
 }
@@ -160,9 +163,9 @@ int sortEmployees(Employee *list, int len, int order) {
 		for (j = i + 1; j < len; j++) {
 			if (order == 1) {
 				if (list[i].sector > list[j].sector) {
-					auxEmployee[i] = list[i]; // Swap de variable
-					list[i] = list[j]; // Swap de variable
-					list[j] = auxEmployee[i]; //Swap de variable
+					auxEmployee[i] = list[i];
+					list[i] = list[j];
+					list[j] = auxEmployee[i];
 				} else if (list[i].sector == list[j].sector
 						&& strcmp(list[i].lastName, list[j].lastName) > 0) {
 					auxEmployee[i] = list[i];
@@ -214,9 +217,7 @@ int printEmployees(Employee *list, int length) {
 	return 0;
 }
 
-
-
-int totalAndAverageSalary(Employee *list, int len, float *average,
+int AverageSalary(Employee *list, int len, float *average,
 		float *acumulator) {
 	int i;
 	int total = 0;
@@ -243,4 +244,40 @@ int totalAndAverageSalary(Employee *list, int len, float *average,
 	return richEmployee;
 }
 
+int getEmployee(Employee *list, int len, int *lastID) {
+	char name[51];
+	char lastName[51];
+	float salary;
+	int sector;
+	int retorno = 0;
+	int ID;
+	int r;
 
+
+	if (findEmpty(list, len ) <= -1) {
+		printf("No hay lugares Disponibles para nuevos empleados.\n");
+		retorno = -1;
+	} else
+	{
+		ID = *lastID + 1;
+		printf("Ingrese el nombre del empleado/a:\n");
+		utn_getName(name);
+		printf("Ingrese el apellido del empleado/a:\n");
+		utn_getName(lastName);
+		printf("Ingrese el sueldo: \n");
+		scanf("%f", &salary);
+	    printf("Ingrese el sector: \n");
+		scanf("%d", &sector);
+	 r=addEmployee(list, len, ID, name, lastName, salary, sector);
+		*lastID = ID;
+		retorno = 0;
+	}
+	if (r != -1) {
+		system("CLS");
+		printf("\nLa carga se realizo de forma exitosa\n");
+	} else {
+		system("CLS");
+		printf("\nNo se ha podido cargar correctamente\n");
+	}
+	return retorno;
+}
